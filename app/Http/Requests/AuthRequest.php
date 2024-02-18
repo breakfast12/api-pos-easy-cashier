@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Http\JsonResponse;
+use App\Rules\ValidationEmailDomain;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
@@ -25,15 +26,28 @@ class AuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => [
+                'required',
+                'email',
+                new ValidationEmailDomain(),
+            ],
             'password' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Email must be a valid email address.',
+            'password.required' => 'Password is required.',
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
         $response = new JsonResponse([
-            'errors' => $validator->errors()->all(),
+            'message' => $validator->errors(),
         ], 400);
 
         throw new ValidationException($validator, $response);
