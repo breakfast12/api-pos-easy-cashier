@@ -17,7 +17,7 @@ class ValidationEmailDomain implements ValidationRule
         $domain = strstr($value, '@');
 
         if (! $domain || strpos($domain, '.') === false || substr($domain, -1) === '.') {
-            $fail('The :attribute must have a valid domain extension.');
+            $fail('The :attribute must have a domain extension');
         }
     }
 }

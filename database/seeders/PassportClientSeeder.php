@@ -34,17 +34,28 @@ class PassportClientSeeder extends Seeder
             ->where('id', $client->id)
             ->update(['provider' => 'employees']);
 
-        //Save personal access client ID to env
-        file_put_contents(
-            app()->environmentFilePath(),
-            "\nPASSPORT_PERSONAL_ACCESS_CLIENT_ID=".$client->id,
-            FILE_APPEND
-        );
+        // Key in the .env
+        $clientIdStr = "PASSPORT_PERSONAL_ACCESS_CLIENT_ID=".$client->id;
+        $clientSecretStr = "PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET=".$client->secret;
 
-        file_put_contents(
-            app()->environmentFilePath(),
-            "\nPASSPORT_PERSONAL_ACCESS_CLIENT_SECRET=".$client->secret,
-            FILE_APPEND
-        );
+        // Read the existing contents from .env
+        $envPath = app()->environmentFilePath();
+        $envContent = file_get_contents($envPath);
+
+        // Update or append the key
+        foreach ([$clientIdStr, $clientSecretStr] as $envVarStr) {
+            $key = strtok($envVarStr, "=");
+
+            if (str_contains($envContent, $key)) {
+                // Replace the existing entry
+                $envContent = preg_replace("/^{$key}=.*/m", $envVarStr, $envContent);
+            } else {
+                // Append the new entry
+                $envContent .= "\n{$envVarStr}";
+            }
+        }
+
+        // Write the changes back to the .env file
+        file_put_contents($envPath, $envContent);
     }
 }

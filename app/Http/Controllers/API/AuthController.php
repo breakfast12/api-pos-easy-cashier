@@ -19,11 +19,7 @@ class AuthController extends Controller
             return new AuthResource(auth()->user());
         }
 
-        return  response()->json([
-            'status' => 'failed',
-            'message' => 'Invalid Email or Password',
-            'code' => 401
-        ]);
+        return response()->responseJson('failed', 'Invalid Email or Password', 401);
     }
 
     public function logout()
@@ -33,10 +29,6 @@ class AuthController extends Controller
             Auth::user()->tokens()->delete();
         }
 
-        return  response()->json([
-            'status' => 'success',
-            'message' => 'User Successfully Logout',
-            'code' => 200
-        ]);
+        return response()->responseJson('success', 'User Successfully Logout', 200);
     }
 }

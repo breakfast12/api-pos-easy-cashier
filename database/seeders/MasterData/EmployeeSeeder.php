@@ -15,7 +15,7 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-        $employee = [
+        $employees = [
             [
                 'id' => Str::uuid(),
                 'name' => 'Momoko Milada',
@@ -28,6 +28,6 @@ class EmployeeSeeder extends Seeder
             ]
         ];
 
-        Employee::insert($employee);
+        Employee::insert($employees);
     }
 }
