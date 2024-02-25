@@ -8,7 +8,9 @@
 .env
 .env.backup
 .env.production
+.env.testing
 .phpunit.result.cache
+.php-cs-fixer.cache
 Homestead.json
 Homestead.yaml
 auth.json
@@ -17,3 +19,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+phpunit.xml
