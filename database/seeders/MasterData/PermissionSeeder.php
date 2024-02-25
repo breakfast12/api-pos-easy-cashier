@@ -27,6 +27,7 @@ class PermissionSeeder extends Seeder
             'view kitchen orders',
             'update kitchen order status',
             'view inventory reports',
+            'manage order vendors',
             'manage all',
         ];
 
@@ -55,7 +56,7 @@ class PermissionSeeder extends Seeder
         $kitchenStaff->givePermissionTo(['view orders', 'update order status']);
 
         $stockManager = Role::findByName('Stock Manager', 'api');
-        $stockManager->givePermissionTo(['manage inventory', 'view inventory reports']);
+        $stockManager->givePermissionTo(['manage inventory', 'view inventory reports', 'manage order vendors']);
 
         $admin = Role::findByName('Admin', 'api');
         $admin->givePermissionTo('manage all');
