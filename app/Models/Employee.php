@@ -13,7 +13,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Employee extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UuidTrait, HasRoles, SoftDeletes;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use UuidTrait;
+    use HasRoles;
+    use SoftDeletes;
 
     protected $table = 'employees';
 

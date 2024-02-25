@@ -15,11 +15,11 @@ class UnitTestingSeeder extends Seeder
      */
     public function run(): void
     {
-       $this->call([
-        EmployeeSeeder::class,
-        PassportClientSeeder::class,
-        RoleSeeder::class,
-        PermissionSeeder::class,
-       ]);
+        $this->call([
+         EmployeeSeeder::class,
+         PassportClientSeeder::class,
+         RoleSeeder::class,
+         PermissionSeeder::class,
+        ]);
     }
 }

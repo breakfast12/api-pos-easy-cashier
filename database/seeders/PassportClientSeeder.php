@@ -21,12 +21,16 @@ class PassportClientSeeder extends Seeder
 
         // Create client password
         $clientRepo->createPasswordGrantClient(
-            null, 'Laravel Password Grant Client', 'http://localhost'
+            null,
+            'Laravel Password Grant Client',
+            'http://localhost'
         );
-        
+
         //Create personal access token client
         $client = $clientRepo->createPersonalAccessClient(
-            null, 'Laravel Personal Access Client', 'http://localhost'
+            null,
+            'Laravel Personal Access Client',
+            'http://localhost'
         );
 
         //Update client with add provider
